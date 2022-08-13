@@ -1,63 +1,48 @@
-import { TurnedInNot } from '@mui/icons-material'
+import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { 
-  Box, 
   Divider, 
-  Drawer, 
-  Grid, 
+  IconButton, 
   List, 
-  ListItem, 
-  ListItemButton, 
-  ListItemIcon, 
-  ListItemText, 
   Toolbar, 
-  Typography 
+  Tooltip, 
+  Typography, 
+  useTheme
 } from '@mui/material'
+import { useSelector } from 'react-redux'
+import { SidebarItem } from './'
 
 
-export const Sidebar = ({ drawerWidth = 240 }) => {
+export const Sidebar = ({handleDrawerClose}) => {
+
+  const theme = useTheme();
+  const {displayName} = useSelector(state => state.auth)
+  const {notes} = useSelector(state => state.journal)
+
   return (
-    <Box
-      component={'nav'}
-      sx={{ width:{sm: drawerWidth }, flexShrink:{ sm: 0 } }}
-    >
-      <Drawer
-        variant='permanent'
-        open
-        sx={{ 
-          width: { xs: 'block'},
-          '& .MuiDrawer-paper':{ boxSizing: 'border-box', width: drawerWidth }
-        }}
-      >
-        <Toolbar>
-          <Typography
-            variant='h6'
-            noWrap
-            component='div'
-          >
-            Danilo Chávez
-          </Typography>
-        </Toolbar>
-        <Divider />
+    <>
+      <Toolbar>
+        <Tooltip title={`Hola, ${displayName}`}>
+        <Typography
+          variant='h6'
+          noWrap
+          component='div'
+        >
+          {displayName}
+        </Typography>
+        </Tooltip>
+        <IconButton onClick={handleDrawerClose}>
+          {theme.direction === 'ltr' ? <ChevronLeft /> : <ChevronRight />}
+        </IconButton>
+      </Toolbar>
+      <Divider />
 
-        <List>
-          {
-            ['Enero', 'Febrero', 'Marzo', 'Abril','Mayo'].map(text => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <TurnedInNot />
-                  </ListItemIcon>
-                  <Grid container>
-                    <ListItemText primary={ text } />
-                    <ListItemText secondary={ 'Deserunt cupidatat minim ipsum pariatur. ' } />
-                  </Grid>
-                </ListItemButton>
-              </ListItem>
-            ))
-          }
-        </List>
-      
-      </Drawer>
-    </Box>
+      <List>
+        {
+          notes.map(note => (
+            <SidebarItem key={note.id} {...note} />
+          ))
+        }
+      </List> 
+    </>
   )
 }

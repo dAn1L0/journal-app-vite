@@ -21,8 +21,9 @@ export const NothingSelectedView = () => {
         <Typography 
           color='white'
           variant='h6'
+          sx={{ textAlign: 'center' }}
         >
-          Selecciona o crea una nota...
+          Selecciona o crea una nota.
         </Typography>
       </Grid>
     </Grid>
