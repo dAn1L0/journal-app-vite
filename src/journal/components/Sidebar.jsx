@@ -23,6 +23,7 @@ export const Sidebar = ({handleDrawerClose}) => {
       <Toolbar>
         <Tooltip title={`Hola, ${displayName}`}>
         <Typography
+          sx={{ paddingRight: 21 }}
           variant='h6'
           noWrap
           component='div'

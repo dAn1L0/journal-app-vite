@@ -1,5 +1,5 @@
 import { DeleteForeverRounded } from '@mui/icons-material'
-import { IconButton, ImageList, ImageListItem, ImageListItemBar } from '@mui/material'
+import { IconButton, ImageList, ImageListItem, ImageListItemBar, Tooltip } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { deleteImage } from '../../helpers'
 import { startDeletingImageOfNote } from '../../store/journal'
@@ -18,7 +18,7 @@ export const ImageGallery = ({images=[]}) => {
   return (
     <ImageList sx={{ width: '100%', height: 360 }} cols={4} rowHeight={150}>
       {images.map((image) => (
-        <ImageListItem key={image}>
+        <ImageListItem key={image} >
           <img
             src={`${image}?w=150&h=150&fit=crop&auto=format`}
             srcSet={`${image}?w=150&h=150&fit=crop&auto=format&dpr=2 2x`}
@@ -26,15 +26,23 @@ export const ImageGallery = ({images=[]}) => {
             loading="lazy"
           />
           <ImageListItemBar
+            sx={{
+              background:
+                'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
+                'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+            }}
+            position="top"
             actionIcon={
               <IconButton
-                size='small'
-                sx={{ color: 'rgba(255, 255, 255, 0.7)' }}
-                onClick={() => deleteImg(image)}
+                sx={{ color: 'white' }}
+                onClick={()=> deleteImg(image)}
               >
-                <DeleteForeverRounded />
+                <Tooltip title='Borrar imagen de la nota'>
+                  <DeleteForeverRounded />
+                </Tooltip>
               </IconButton>
             }
+            actionPosition="right"
           />
         </ImageListItem>
       ))}

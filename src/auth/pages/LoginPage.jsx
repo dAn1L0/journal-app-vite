@@ -9,13 +9,13 @@ import { useMemo, useState } from 'react'
 
 
 const formData = {
-  email: 'danilo@chavez.com',
-  password: '123456'
+  email: '',
+  password: ''
 }
 
 const formValidations = {
-  email: [(value)=> value.includes('@'), 'El correo es obligatorio'],
-  password: [(value)=> value.length >= 6, 'La contraseña es obligatoria'],
+  email: [(value)=> value.includes('@'), 'El correo es obligatorio.'],
+  password: [(value)=> value.length >= 6, 'La contraseña es obligatoria.'],
 }
 
 export const LoginPage = () => {
@@ -48,7 +48,6 @@ export const LoginPage = () => {
   }
 
   const onGoogleSignIn = () => {
-    console.log('onGoogleSignIn');
     dispatch( startGoogleSignIn() )
   }
 

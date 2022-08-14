@@ -14,6 +14,12 @@ export const SidebarItem = ({title='',body, id, date, imagesUrls=[] }) => {
       : title
   },[title])
 
+  const newBody = useMemo(() => {
+    return body.length > 60
+      ? body.substring(0,60) + ' ...'
+      : body
+  },[body])
+
   const handleClick = () => {
     dispatch( setActiveNote({title,body,id, date,imagesUrls}) )
   }
@@ -21,15 +27,15 @@ export const SidebarItem = ({title='',body, id, date, imagesUrls=[] }) => {
   return (
     <ListItem disablePadding onClick={ handleClick }>
       <ListItemButton>
-        <ListItemIcon>
-          <TurnedInNot />
-        </ListItemIcon>
+        {/* <ListItemIcon> */}
+          <TurnedInNot sx={{ marginRight: 1, color: '#c4c4c4' }} />
+        {/* </ListItemIcon> */}
         <Grid container>
           <ListItemText primary={ newTitle } />
           {
             (imagesUrls.length > 0) && <AttachFileOutlined color='primary' fontSize='small' sx={{ opacity:'0.3' }}/>
           }
-          <ListItemText secondary={ body } />
+          <ListItemText secondary={ newBody } />
         </Grid>
       </ListItemButton>
     </ListItem>

@@ -7,15 +7,15 @@ import { startRegister } from '../../store/auth'
 import { useDispatch, useSelector } from 'react-redux'
 
 const formData = {
-  displayName: 'Danilo Chávez',
-  email: 'danilo@chavez.com',
-  password: '123456'
+  displayName: '',
+  email: '',
+  password: ''
 }
 
 const formValidations = {
-  email: [(value)=> value.includes('@'), 'El correo no es válido'],
-  password: [(value)=> value.length >= 6, 'La contraseña debe contener más de 6 caracteres'],
-  displayName: [(value)=> value.trim().length >= 1, 'El nombre es obligatorio']
+  email: [(value)=> value.includes('@'), 'El correo es obligatorio.'],
+  password: [(value)=> value.length >= 6, 'La contraseña debe contener más de 6 caracteres.'],
+  displayName: [(value)=> value.trim().length >= 1, 'El nombre es obligatorio.']
 }
 
 
